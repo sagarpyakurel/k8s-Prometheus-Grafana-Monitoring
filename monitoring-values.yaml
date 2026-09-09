@@ -1,0 +1,24 @@
+
+
+grafana:
+  grafana.ini:
+    smtp:
+      enabled: true
+      host: smtp.gmail.com:587
+      user: $__env{GF_SMTP_USER}
+      password: $__env{GF_SMTP_PASSWORD}
+      from_address: pyakurelsagarofficial@gmail.com
+      from_name: Grafana
+      startTLS_policy: MandatoryStartTLS
+
+  env:
+    GF_SMTP_USER:
+      valueFrom:
+        secretKeyRef:
+          name: grafana-smtp
+          key: user
+    GF_SMTP_PASSWORD:
+      valueFrom:
+        secretKeyRef:
+          name: grafana-smtp
+          key: password
